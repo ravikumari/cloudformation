@@ -1,0 +1,31 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Create an EC2 instance with a key pair",
+    "Parameters": {
+        "KeyName": {
+            "Description": "Name of an existing Key Pair to access the EC2 instances",
+            "Type": "AWS::EC2::KeyPair::KeyName",
+            "ConstraintDescription": "Must be an existing KeyPair"
+        },
+        "InstanceType": {
+            "Description": "Instance Type to be installed on",
+            "Type": "String",
+            "Default": "t2.micro",
+            "ConstraintDescription": "Must be a Valid EC2 Instance Type"
+        }
+    },
+    "Resources": {
+        "WebServer": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "ImageId": "ami-467ca739",
+                "InstanceType": {
+                    "Ref": "InstanceType"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                }
+            }
+        }
+    }
+} 
